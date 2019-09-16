@@ -8,8 +8,7 @@ import os
 import tweepy as tw
 
 #keys from Twitter API
-consumer_key = 'kf4P8Edo8ZXtvgZU8RsmsqY1L'
-consumer_secret = '3nyDtxBbeXrJLxo9u5fC8yXbkSySxJTGTSEz26tDc06nAWSm6s'
+
 #access_token = ''
 #access_token_secret = ''
 
