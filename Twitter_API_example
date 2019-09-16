@@ -1,0 +1,24 @@
+# -*- coding: utf-8 -*-
+"""
+Spyder Editor
+
+
+"""
+import os
+import tweepy as tw
+
+#keys from Twitter API
+consumer_key = 'kf4P8Edo8ZXtvgZU8RsmsqY1L'
+consumer_secret = '3nyDtxBbeXrJLxo9u5fC8yXbkSySxJTGTSEz26tDc06nAWSm6s'
+#access_token = ''
+#access_token_secret = ''
+
+auth = tw.OAuthHandler(consumer_key, consumer_secret)
+api = tw.API(auth, wait_on_rate_limit=True)
+
+searchterm = "queen"
+date = '2019-01-01'
+
+tweets = api.search(q=searchterm,count=10)
+
+print(tweets)
