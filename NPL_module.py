@@ -24,7 +24,36 @@ def what_sentiment(text):
 		print("Neutral")
 	#print('Text: {}'.format(text))
 	print('Sentiment: {}, {}'.format(sentiment.score, sentiment.magnitude))
-PATH = input("What is the path for the authentication key: ")
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = PATH
-text = input("Enter text to be analyzed: ")
-what_sentiment(text)
+
+#basic get the sentiment value of a string
+def get_sentiment(text):
+	client = language.LanguageServiceClient()
+
+	document = types.Document(
+    	content=text,
+    	type=enums.Document.Type.PLAIN_TEXT)
+
+	sentiment = client.analyze_sentiment(document=document).document_sentiment
+
+	return sentiment.score
+
+#input is a list of strings and the output the average of the sentiment value
+def avg_sentiment(*text):
+	client = language.LanguageServiceClient()
+	sentiment_list = []
+	for tex in range(len(text)):
+		document = types.Document(
+    		content=text[tex],
+    		type=enums.Document.Type.PLAIN_TEXT)
+
+		sentiment = client.analyze_sentiment(document=document).document_sentiment
+		sentiment_list.append(sentiment.score)
+	for a in range(len(sentiment_list)):
+		if a == 0:
+			value1 = sentiment_list[a]
+		else:
+			value2 = value1 + sentiment_list[a]
+			value1 = value2
+
+	average = value1/len(sentiment_list)
+	return average
