@@ -1,7 +1,6 @@
 import os
 from NPL_module import avg_sentiment
 from Twitter_Updated import readtweets
-from Twitter_Updated import top5tweets
 import os
 import tweepy as tw
 
@@ -23,18 +22,15 @@ while True:
                 text = input("Enter search term here: ")
                 print("Here are the Top 5 tweets for " + text)
                 print("")
-                t5tweets = top5tweets(text,consumer_key, consumer_secret)
+                t5tweets = readtweets(text,0,consumer_key, consumer_secret)
                 for i in range(len(t5tweets)):
                         print(t5tweets[i])
                         print("")
                 
-
-
-
         elif choice == "2":
                 text = input("Enter search term here: ")
                 if(text[0] == "@"):
-                        tweetlist = readtweets(text, consumer_key, consumer_secret)
+                        tweetlist = readtweets(text,1,consumer_key, consumer_secret)
                         print("Please Wait...")
                         answer = avg_sentiment(*tweetlist)
                         if (answer >= 0.25 and answer <= 1):
@@ -46,7 +42,7 @@ while True:
                        
                 
                 elif (text[0] == "#"):
-                        tweetlist = readtweets(text, consumer_key, consumer_secret)
+                        tweetlist = readtweets(text,1, consumer_key, consumer_secret)
                         print("Please Wait...")
                         answer = avg_sentiment(*tweetlist)
                         if (answer >= 0.25 and answer <= 1):
@@ -57,7 +53,7 @@ while True:
                             print(text, "is negative right now!")
                         
                 else:
-                        tweetlist = readtweets(text, consumer_key, consumer_secret)
+                        tweetlist = readtweets(text,1,consumer_key, consumer_secret)
                         print("Please Wait...")
                         answer = avg_sentiment(*tweetlist)
                         if (answer >= 0.25 and answer <= 1):
@@ -66,16 +62,15 @@ while True:
                             print(text, " is neutral right now!")
                         elif (answer >= -1 and answer < -0.25):
                             print(text, " is negative right now!")
-                        
-                
+                              
         else:
                 print("Please Enter a Valid Choice")
 
         restart = input("Would you like to restart the program? Type Yes or No: ")
        
-        if restart == 'No':
+        if restart == 'No' or restart == "no":
                 break
-        if restart == "Yes":
+        if restart == "Yes" or restart == "yes":
                 continue
 
 input("Press Enter to continue...")
